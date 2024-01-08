@@ -1,12 +1,15 @@
 package com.example.tasktracker.service;
 
 import com.example.tasktracker.DTO.UserDto;
+import com.example.tasktracker.DTO.UserSummaryDto;
 import com.example.tasktracker.entity.User;
 import com.example.tasktracker.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -48,6 +51,16 @@ public class UserService {
         userDto.setUsername(user.getUsername());
         userDto.setEmail(user.getEmail());
         userDto.setRole(user.getRole());
+        userDto.setPassword(user.getPassword());
         return userDto;
+    }
+    public List<UserSummaryDto> getAllUsers() {
+        return userRepository.findAll().stream()
+                .map(user -> new UserSummaryDto(user.getId(), user.getUsername()))
+                .collect(Collectors.toList());
+    }
+
+    public Optional<UserDto> getUserByUsername(String username) {
+        return userRepository.findByUsername(username).map(this::convertToDto);
     }
 }

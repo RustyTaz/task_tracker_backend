@@ -22,11 +22,9 @@ public class Task {
     @Enumerated(EnumType.STRING)
     private TaskPriority priority;
 
-    @ManyToOne
-    private User createdBy;
+    private Long createdBy;
 
-    @ManyToOne
-    private User responsibleUser;
+    private Long responsibleUser;
 
     private LocalDateTime deadline;
 
@@ -84,19 +82,19 @@ public class Task {
         this.priority = priority;
     }
 
-    public User getCreatedBy() {
+    public Long getCreatedBy() {
         return createdBy;
     }
 
-    public void setCreatedBy(User createdBy) {
+    public void setCreatedBy(Long createdBy) {
         this.createdBy = createdBy;
     }
 
-    public User getResponsibleUser() {
+    public Long getResponsibleUser() {
         return responsibleUser;
     }
 
-    public void setResponsibleUser(User responsibleUser) {
+    public void setResponsibleUser(Long responsibleUser) {
         this.responsibleUser = responsibleUser;
     }
 

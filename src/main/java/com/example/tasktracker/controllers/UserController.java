@@ -1,10 +1,21 @@
 package com.example.tasktracker.controllers;
 
 import com.example.tasktracker.DTO.UserDto;
+import com.example.tasktracker.DTO.UserSummaryDto;
 import com.example.tasktracker.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+/*
+{
+        "username": "user",
+        "email": "email",
+        "role": "FRONT_DEVELOPER",
+        "password": "123"
+        }
+*/
 
 @RestController
 @RequestMapping("/users")
@@ -36,5 +47,17 @@ public class UserController {
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping
+    public ResponseEntity<List<UserSummaryDto>> getAllUsers() {
+        return ResponseEntity.ok(userService.getAllUsers());
+    }
+
+    @GetMapping("/by-username/{username}")
+    public ResponseEntity<UserDto> getUserByUsername(@PathVariable String username) {
+        return userService.getUserByUsername(username)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }

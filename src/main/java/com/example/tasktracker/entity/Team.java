@@ -14,11 +14,9 @@ public class Team {
     private String name;
     private String description;
 
-    @OneToOne
-    private User teamLeader;
+    private Long teamLeader;
 
-    @OneToOne
-    private User teamCreator;
+    private Long teamCreator;
 
     @ManyToMany
     private Set<User> members = new HashSet<>();
@@ -50,19 +48,19 @@ public class Team {
         this.description = description;
     }
 
-    public User getTeamLeader() {
+    public Long getTeamLeader() {
         return teamLeader;
     }
 
-    public void setTeamLeader(User teamLeader) {
+    public void setTeamLeader(Long teamLeader) {
         this.teamLeader = teamLeader;
     }
 
-    public User getTeamCreator() {
+    public Long getTeamCreator() {
         return teamCreator;
     }
 
-    public void setTeamCreator(User teamCreator) {
+    public void setTeamCreator(Long teamCreator) {
         this.teamCreator = teamCreator;
     }
 
