@@ -12,10 +12,10 @@ public class Attachment {
     private String fileUrl;
 
     @ManyToOne
+    @JoinColumn(name = "task_id")
     private Task task;
 
-    public Attachment() {
-    }
+    // Конструкторы, геттеры и сеттеры
 
     public Long getId() {
         return id;
@@ -48,5 +48,19 @@ public class Attachment {
     public void setTask(Task task) {
         this.task = task;
     }
+
+    // Метод для удобства получения идентификатора задачи
+    public Long getTaskId() {
+        return task != null ? task.getId() : null;
+    }
+
+    // Метод для удобства установки идентификатора задачи
+    public void setTaskId(Long taskId) {
+        if (this.task == null) {
+            this.task = new Task();
+        }
+        this.task.setId(taskId);
+    }
+
 }
 

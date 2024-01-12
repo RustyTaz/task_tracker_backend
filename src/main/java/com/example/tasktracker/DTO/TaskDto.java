@@ -1,37 +1,23 @@
-package com.example.tasktracker.entity;
+package com.example.tasktracker.DTO;
+
 import com.example.tasktracker.enums.TaskPriority;
 import com.example.tasktracker.enums.TaskStatus;
-import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "tasks")
-public class Task {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class TaskDto {
     private Long id;
-
     private String title;
     private String description;
     private LocalDateTime creationDate;
-
-    @Enumerated(EnumType.STRING)
     private TaskStatus status;
-
-    @Enumerated(EnumType.STRING)
     private TaskPriority priority;
-
-    private Long createdBy;
-
-    private Long responsibleUser;
-
+    private Long createdByUserId;
+    private Long responsibleUserId;
     private LocalDateTime deadline;
+    private Long teamId;
 
-    @ManyToOne
-    private Team team;
-
-    public Task() {
+    public TaskDto() {
     }
 
     public Long getId() {
@@ -82,20 +68,20 @@ public class Task {
         this.priority = priority;
     }
 
-    public Long getCreatedBy() {
-        return createdBy;
+    public Long getCreatedByUserId() {
+        return createdByUserId;
     }
 
-    public void setCreatedBy(Long createdBy) {
-        this.createdBy = createdBy;
+    public void setCreatedByUserId(Long createdByUserId) {
+        this.createdByUserId = createdByUserId;
     }
 
-    public Long getResponsibleUser() {
-        return responsibleUser;
+    public Long getResponsibleUserId() {
+        return responsibleUserId;
     }
 
-    public void setResponsibleUser(Long responsibleUser) {
-        this.responsibleUser = responsibleUser;
+    public void setResponsibleUserId(Long responsibleUserId) {
+        this.responsibleUserId = responsibleUserId;
     }
 
     public LocalDateTime getDeadline() {
@@ -106,40 +92,13 @@ public class Task {
         this.deadline = deadline;
     }
 
-    public Team getTeam() {
-        return team;
-    }
-
-    public void setTeam(Team team) {
-        this.team = team;
-    }
-
-    /////
-    public Long getCreatedByUserId() {
-        return createdBy;
-    }
-
-    public void setCreatedByUserId(Long createdByUserId) {
-        this.createdBy = createdByUserId;
-    }
-
-    public Long getResponsibleUserId() {
-        return responsibleUser;
-    }
-
-    public void setResponsibleUserId(Long responsibleUserId) {
-        this.responsibleUser = responsibleUserId;
-    }
-
     public Long getTeamId() {
-        return team != null ? team.getId() : null;
+        return teamId;
     }
 
     public void setTeamId(Long teamId) {
-        if (this.team == null) {
-            this.team = new Team();
-        }
-        this.team.setId(teamId);
+        this.teamId = teamId;
     }
+    // Constructors, Getters, and Setters
+    // ...
 }
-
